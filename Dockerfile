@@ -1,6 +1,6 @@
 
-FROM tomcat:8.0.20-jre8
+FROM tomcat:latest
 
 RUN mkdir /usr/local/tomcat/webapps/mywebapp
 
-COPY ./project-1.0-RAMA.war /usr/local/tomcat/webapps/Dockerdemo.war
+COPY ./AVNCommunication-1.0.war /usr/local/tomcat/webapps/QAWebapp.war
