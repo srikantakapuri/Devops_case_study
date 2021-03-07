@@ -1,0 +1,46 @@
+- name: "Ansible VMs Creations"
+  hosts: localhost
+  tasks:
+    -
+      ec2:
+        instance_tags:
+          Name: Build-Env
+        assign_public_ip: true
+        count: 1
+        group: launch-wizard-3
+        image: ami-013f17f36f8b1fefb
+        instance_type: t2.medium
+        key_name: MyWindowsKey
+        region: us-east-1
+        vpc_subnet_id: subnet-0dca7f33
+        wait: true
+      name: "launching AWS instance for Deploy/Build Server"
+    -
+      ec2:
+        instance_tags:
+          Name: Test-Env
+        assign_public_ip: true
+        count: 1
+        group: launch-wizard-3
+
+        image: ami-013f17f36f8b1fefb
+        instance_type: t2.micro
+        key_name: MyWindowsKey
+        region: us-east-1
+        vpc_subnet_id: subnet-0dca7f33
+        wait: true
+      name: "launching AWS instance for Test Server"
+    -
+      ec2:
+        instance_tags:
+          Name: Prod-Env
+        assign_public_ip: true
+        count: 1
+        group: launch-wizard-3
+        image: ami-013f17f36f8b1fefb
+        instance_type: t2.micro
+        key_name: MyWindowsKey
+        region: us-east-1
+        vpc_subnet_id: subnet-0dca7f33
+        wait: true
+      name: "launching AWS instance for Prod Server"
