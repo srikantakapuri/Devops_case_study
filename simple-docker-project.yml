@@ -1,6 +1,5 @@
 ---
----
-- hosts: all
+- hosts: TestServers
   become: true
   tasks:
   - name: stop if we have old docker container
