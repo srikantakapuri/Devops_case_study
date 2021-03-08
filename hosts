@@ -1,0 +1,12 @@
+[DockerServers]
+localhost
+172.31.62.31    ansible_python_interpreter=/usr/bin/python3
+52.91.134.48    ansible_python_interpreter=/usr/bin/python3
+[DBServers]
+52.91.134.48    ansible_python_interpreter=/usr/bin/python3
+[TestServers]
+52.91.134.48    ansible_python_interpreter=/usr/bin/python3
+[ProdServers]
+172.31.62.31    ansible_python_interpreter=/usr/bin/python3
+[BuildServers]
+100.25.47.83    ansible_python_interpreter=/usr/bin/python3
