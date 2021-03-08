@@ -75,11 +75,11 @@ stage ('Unit & Performance test') {
                 }
             }
     	}
-    	stage('Performance test') {
-                steps {
-                  blazeMeterTest credentialsId: 'Blazemeter', testId: '9018223.taurus', workspaceId: '757349'
-                }
-        }
+    	//stage('Performance test') {
+               // steps {
+                 // blazeMeterTest credentialsId: 'Blazemeter', testId: '9018223.taurus', workspaceId: '757349'
+                //}
+        //}
     }
 }
         stage('Push prod image to DockerHub ') {
