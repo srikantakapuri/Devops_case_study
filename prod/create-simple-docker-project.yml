@@ -1,0 +1,24 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+  - name: create docker image using war file
+    command: docker build -t prod-simple-devops-image:latest .
+    args:
+      chdir: /home/ansadmin/Devops_case_study/prod
+
+  - name: create tag to image
+    command: docker tag prod-simple-devops-image sri40718/prod-simple-devops-image
+
+  - name: Log into DockerHub
+    docker_login:
+      username: xxxxxx
+      password: xxxxxx
+      email: srikantakapuri@gmail.com
+
+  - name: push image on to dockerhub
+    command: docker push sri40718/prod-simple-devops-image
+
+  - name: remove docker immages from ansible server
+    command: docker rmi prod-simple-devops-image:latest sri40718/prod-simple-devops-image
+    ignore_errors: yes
