@@ -82,31 +82,7 @@ stage ('Unit & Performance test') {
         //}
     }
 }
-        stage('Push prod image to DockerHub ') {
-            steps {
-                sshPublisher(publishers: [sshPublisherDesc(configName: 'Test-env', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'ansible-playbook -i /etc/ansible/hosts /home/ansadmin/Devops_case_study/prod/create-simple-docker-project.yml', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '//home//ansadmin//Devops_case_study//prod', remoteDirectorySDF: false, removePrefix: 'target', sourceFiles: 'target/*.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
-            
-                slackSend channel: '#alerts', message: 'Prod Image is  pushed to Dockerhub' 
-            }
-        }
-        stage('Deploying in Prod from Dockerhub') {
-            steps {
-                sshPublisher(publishers: [sshPublisherDesc(configName: 'Test-env', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'ansible-playbook -i /etc/ansible/hosts /home/ansadmin/Devops_case_study/prod/simple-docker-project.yml', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true)])
-            
-                slackSend channel: '#alerts', message: 'Prod deployment completed' 
-            }
-            
-        }
-        stage("Sanity test"){
-    		steps{
-    		   sh "mvn -B -f /var/lib/jenkins/workspace/Test-Project/Acceptancetest/pom.xml install"
-    		}
-    		post {
-                success {
-                   publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '\\Acceptancetest\\target\\surefire-reports', reportFiles: 'index.html', reportName: 'Sanity Test Report', reportTitles: ''])
-                }
-            }
-    	}
+       
     }
     
 }
